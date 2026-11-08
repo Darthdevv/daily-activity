@@ -1,0 +1,27 @@
+
+name: Daily GitHub Contribution
+
+on:
+  schedule:
+    - cron: "15 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make daily contribution
+        run: |
+          git config user.name "Darthdevv"
+          git config user.email "yousefelgohary455@gmail.com"
+
+          echo "$(date -u)" >> activity.txt
+
+          git add activity.txt
+          git commit -m "Daily contribution"
+          git push
